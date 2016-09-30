@@ -4864,6 +4864,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           // Check if ID is falsy
           if (!id) continue;
 
+          // In some uncommon cases, elements that are later in the
+          // matches array can be removed from the document by earlier
+          // iterations. See https://github.com/rstudio/shiny/issues/1399
+          if (!$.contains(document, el)) continue;
+
           var $el = $(el);
           if ($el.hasClass('shiny-bound-output')) {
             // Already bound; can happen with nested uiOutput (bindAll
